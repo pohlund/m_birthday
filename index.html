@@ -258,6 +258,23 @@
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
             border-color: var(--pale-pink);
         }
+
+        .activity-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .card-content {
+            /* This padding creates space around the header within the card */
+            padding: 1.5rem;
+        }
+
+        .card-content p {
+            margin: 0;
+            height: 0;
+            overflow: hidden;
+        }
         
         /* --- Modal Styles --- */
         body.modal-open {
@@ -556,7 +573,7 @@
                 // Get content from the clicked card
                 const imageSrc = card.querySelector('img').src;
                 const title = card.querySelector('h3').innerText;
-                const description = card.querySelector('p').innerText;
+                const description = card.querySelector('p').textContent;
 
                 // Populate the modal
                 modalImage.src = imageSrc;

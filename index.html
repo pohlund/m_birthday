@@ -460,7 +460,7 @@
                     </div>
 
                     <!-- Activity 2 -->
-                    <div class="activity-card locked fade-in-section" data-activity-id="2">
+                    <div class="activity-card locked fade-in-section" data-activity-id="2" data-unlock-date="2025-09-14T18:15:00">
                         <img src="activity2.png" alt="Förmiddagsaktivitet">
                         <div class="card-content">
                             <h3>2. Förmiddagsaktivitet</h3>
@@ -470,7 +470,7 @@
                     </div>
 
                     <!-- Activity 3 -->
-                    <div class="activity-card locked fade-in-section" data-activity-id="3">
+                    <div class="activity-card locked fade-in-section" data-activity-id="3" data-unlock-date="2025-09-14T19:00:00">
                         <img src="activity3.png" alt="Lunch">
                          <div class="card-content">
                             <h3>3. Lunch</h3>
@@ -480,7 +480,7 @@
                     </div>
 
                     <!-- Activity 4 -->
-                    <div class="activity-card locked fade-in-section" data-activity-id="3">
+                    <div class="activity-card locked fade-in-section" data-activity-id="4" data-unlock-date="2025-09-14T20:00:00">
                         <img src="activity4.png" alt="Eftermiddagsaktivitet">
                          <div class="card-content">
                             <h3>4. Eftermiddagsaktivitet</h3>
@@ -490,7 +490,7 @@
                     </div>
 
                     <!-- Activity 5 -->
-                    <div class="activity-card locked fade-in-section" data-activity-id="3">
+                    <div class="activity-card locked fade-in-section" data-activity-id="5" data-unlock-date="2025-09-14T21:00:00">
                         <img src="activity5.png" alt="Fördrink">
                          <div class="card-content">
                             <h3>5. Fördrink</h3>
@@ -500,7 +500,7 @@
                     </div>
 
                     <!-- Activity 6 -->
-                    <div class="activity-card locked fade-in-section" data-activity-id="3">
+                    <div class="activity-card locked fade-in-section" data-activity-id="6" data-unlock-date="2025-09-14T22:00:00">
                         <img src="activity6.png" alt="Middag">
                          <div class="card-content">
                             <h3>6. Middag</h3>
@@ -510,7 +510,7 @@
                     </div>
                     
                     <!-- Activity 7 -->
-                    <div class="activity-card locked fade-in-section" data-activity-id="3">
+                    <div class="activity-card locked fade-in-section" data-activity-id="7" data-unlock-date="2025-09-15T10:00:00">
                         <img src="activity7.png" alt="Next day">
                          <div class="card-content">
                             <h3>7. Next day</h3>
@@ -564,6 +564,22 @@
             sectionsToAnimate.forEach(section => {
                 observer.observe(section);
             });
+
+            // --- Time-based unlocking ---
+            const checkActivityLocks = () => {
+                const now = new Date();
+                const activityCards = document.querySelectorAll('.activity-card[data-unlock-date]');
+
+                activityCards.forEach(card => {
+                    const unlockDate = new Date(card.dataset.unlockDate);
+                    if (now >= unlockDate) {
+                        card.classList.remove('locked');
+                    }
+                });
+            };
+
+            checkActivityLocks();
+            setInterval(checkActivityLocks, 60000); // Check every minute
 
             // --- Modal functionality ---
             const activityCards = document.querySelectorAll('.activity-card');
